@@ -1,8 +1,9 @@
 import cv2 as cv
 import numpy as np
 import os
-import serial
-import time
+
+# import serial
+# import time
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 import tensorflow as tf
@@ -12,15 +13,15 @@ from keras_facenet import FaceNet
 
 
 facenet = FaceNet()
-faces_embeddings = np.load("faces_embeddings_4classes.npz")
+faces_embeddings = np.load("faces_embeddings_6classes.npz")
 Y = faces_embeddings["arr_1"]
 encoder = LabelEncoder()
 encoder.fit(Y)
 haarcascade = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
-model = pickle.load(open("svm_model_160x160.pkl", "rb"))
+model = pickle.load(open("svm_model_160x160_group.pkl", "rb"))
 
 
-ser = serial.Serial("COM9", 9600)
+# ser = serial.Serial("COM9", 9600)
 
 cap = cv.VideoCapture(0)
 
@@ -56,14 +57,14 @@ while cap.isOpened():
             cv.LINE_AA,
         )
 
-        if (
-            final_name in ["Ebrahem", "jenna_ortega", "robert_downey", "taylor_swift"]
-            and max_confidence > 0.90
-        ):
-            ser.write(b"1")
-            time.sleep(5)
-            ser.write(b"0")
-            pass
+        # if (
+        #     final_name in ["Ebrahem", "jenna_ortega", "robert_downey", "taylor_swift"]
+        #     and max_confidence > 0.90
+        # ):
+        #     ser.write(b"1")
+        #     time.sleep(5)
+        #     ser.write(b"0")
+        #     pass
 
     cv.imshow("Face Recognition:", frame)
     if cv.waitKey(1) & 0xFF == ord("q"):
