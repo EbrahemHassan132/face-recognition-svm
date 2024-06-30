@@ -85,11 +85,11 @@ face-recognition-svm/
 3. Add face images to the corresponding subdirectories. Ensure that the images are clear and properly labeled.
 
 ## Training the Model
-1. Run the `train.py` script to load the dataset, extract face embeddings, and train the SVM model.
+1. Run the `create_the_model.py` script to load the dataset, extract face embeddings, and train the SVM model.
 2. The script will save the trained model as `svm_model_160x160_group.pkl` and the face embeddings as `faces_embeddings_6classes.npz`.
 
 ## Testing the Model
-1. Run the `recognize.py` script to perform real-time face recognition using your webcam.
+1. Run the `main.py` script to perform real-time face recognition using your webcam.
 2. The script will display the recognized faces along with their names and confidence scores.
 
 ## Contributing
