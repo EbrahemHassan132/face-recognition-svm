@@ -48,11 +48,11 @@ This project implements a face recognition system using Support Vector Machine (
 1. Prepare your dataset as described in the [Dataset Preparation](#dataset-preparation) section.
 2. Run the training script to train the SVM model:
     ```bash
-    python train.py
+    python create_the_model.py
     ```
 3. Run the real-time face recognition script:
     ```bash
-    python recognize.py
+    python main.py
     ```
 
 ## Project Structure
@@ -108,4 +108,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-Feel free to customize this README file to suit your project's specifics and include any additional information that might be relevant.
