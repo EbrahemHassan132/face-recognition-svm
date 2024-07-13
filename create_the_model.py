@@ -16,7 +16,29 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 
 class FACELOADING:
+    """
+    A class to load and process face images for face recognition tasks.
+
+    Attributes:
+    directory (str): The main directory containing face image subdirectories.
+    target_size (tuple): The target size for resizing face images.
+    X (list): A list to store loaded face images.
+    Y (list): A list to store corresponding labels for the face images.
+    detector (MTCNN): An instance of MTCNN for face detection.
+
+    Methods:
+    extract_face(filename): Extracts and resizes the face from an image file.
+    load_faces(dir): Loads faces from a directory and returns a list of face images.
+    load_classes(): Loads all face images and their corresponding labels from the main directory.
+    plot_images(): Plots the loaded face images.
+    """
     def __init__(self, directory):
+        """
+        Initializes the FACELOADING class with the given directory.
+
+        Parameters:
+        directory (str): The main directory containing face image subdirectories.
+        """
         self.directory = directory
         self.target_size = (160, 160)
         self.X = []
@@ -26,6 +48,12 @@ class FACELOADING:
     def extract_face(self, filename):
         """
         Extracts and resizes the face from an image file.
+
+        Parameters:
+        filename (str): The path to the image file.
+
+        Returns:
+        np.array: The extracted and resized face image.
         """
         img = cv.imread(filename)
         img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
@@ -38,6 +66,12 @@ class FACELOADING:
     def load_faces(self, dir):
         """
         Loads faces from a directory and returns a list of face images.
+
+        Parameters:
+        dir (str): The directory containing face images.
+
+        Returns:
+        list: A list of face images.
         """
         FACES = []
         for im_name in os.listdir(dir):
@@ -52,6 +86,9 @@ class FACELOADING:
     def load_classes(self):
         """
         Loads all face images and their corresponding labels from the main directory.
+
+        Returns:
+        tuple: A tuple containing two numpy arrays: face images and their corresponding labels.
         """
         for sub_dir in os.listdir(self.directory):
             path = self.directory + "/" + sub_dir + "/"
@@ -90,6 +127,12 @@ embedder = FaceNet()
 def get_embedding(face_img):
     """
     Generates an embedding for a given face image using FaceNet.
+
+    Parameters:
+    face_img (np.array): The face image to generate an embedding for.
+
+    Returns:
+    np.array: The generated face embedding.
     """
     face_img = face_img.astype("float32")
     face_img = np.expand_dims(face_img, axis=0)
