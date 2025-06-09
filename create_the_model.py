@@ -32,6 +32,7 @@ class FACELOADING:
     load_classes(): Loads all face images and their corresponding labels from the main directory.
     plot_images(): Plots the loaded face images.
     """
+
     def __init__(self, directory):
         """
         Initializes the FACELOADING class with the given directory.
@@ -114,7 +115,9 @@ class FACELOADING:
 
 
 # Initialize the FACELOADING class with the dataset directory
-faceloading = FACELOADING(r"D:\Lecturs\Mechatronics Systems 2\face_recognition\dataset")
+faceloading = FACELOADING(
+    r"D:\Lecturs\Mechatronics Systems 2\face_recognition_app\dataset"
+)
 X, Y = faceloading.load_classes()
 
 # Plot the loaded face images
@@ -152,6 +155,8 @@ np.savez_compressed("faces_embeddings_6classes.npz", EMBEDDED_X, Y)
 # Encode the labels
 encoder = LabelEncoder()
 encoder.fit(Y)
+with open("encoder.pkl", "wb") as f:
+    pickle.dump(encoder, f)
 Y = encoder.transform(Y)
 
 # Split the dataset into training and testing sets
